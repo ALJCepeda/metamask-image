@@ -4,7 +4,7 @@ import {homedir} from "os";
 import {existsSync, mkdirSync, createWriteStream} from "fs";
 import {join, parse} from "path";
 import AdmZip = require("adm-zip");
-import {log1, log2} from "../utils";
+import {log1, log2} from "../src/utils";
 
 const URL = 'https://api.github.com/repos/metamask/metamask-extension/releases';
 
@@ -14,7 +14,7 @@ interface MetamaskRelease {
   tag: string;
 }
 
-const DEFAULT_DEST = `${homedir()}/.cache/metamask`;
+export const DEFAULT_DEST = `${homedir()}/.cache/metamask`;
 
 export async function fetchMetamask(userAgent: string = 'Mozilla/5.0', version = 'latest') {
   log1('Fetching metamask');
@@ -105,3 +105,5 @@ async function getMetamaskRelease(userAgent: string, version = 'latest'): Promis
     });
   });
 }
+
+fetchMetamask().then(() => log1('Done!'));

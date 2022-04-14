@@ -1,12 +1,11 @@
 import * as puppet from "puppeteer";
-import {fetchMetamask} from "./fetchMetamask";
 import {setupMetamask} from "./setupMetamask";
+import {DEFAULT_DEST} from "../../scripts/fetchMetamask";
 
 (async () => {
-  const metamaskPath = await fetchMetamask();
   const browser = await puppet.launch({
     headless: false,
-    args: [`--disable-extensions-except=${metamaskPath}`, `--load-extension=${metamaskPath}`]
+    args: [`--disable-extensions-except=${DEFAULT_DEST}`, `--load-extension=${DEFAULT_DEST}`]
   });
 
   await setupMetamask(browser);

@@ -4,7 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "browser": "ts-node src/browser/index.ts"
+    "start": "docker run -it --rm ",
+    "build": "docker build -t metamask .",
+    "browser": "ts-node src/browser/index.ts",
+    "inspect": "docker run -it --rm -v ${pwd}:/mnt/host metamask zsh",
+    "download-metamask": "ts-node scripts/fetchMetamask.ts"
   },
   "dependencies": {
     "adm-zip": "^0.5.9",
