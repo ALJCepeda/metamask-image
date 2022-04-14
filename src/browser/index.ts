@@ -1,11 +1,14 @@
 import * as puppet from "puppeteer";
 import {setupMetamask} from "./setupMetamask";
-import {DEFAULT_DEST} from "../../scripts/fetchMetamask";
+import {JSAML} from "@vlegm/utils";
+import {MANIFEST_PATH} from "../config";
 
 (async () => {
+  const manifest = await JSAML.read(MANIFEST_PATH) as any;
+
   const browser = await puppet.launch({
     headless: false,
-    args: [`--disable-extensions-except=${DEFAULT_DEST}`, `--load-extension=${DEFAULT_DEST}`]
+    args: [`--disable-extensions-except=${manifest.latest}`, `--load-extension=${manifest.latest}`]
   });
 
   await setupMetamask(browser);

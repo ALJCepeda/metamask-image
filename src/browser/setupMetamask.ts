@@ -53,7 +53,7 @@ export async function setupMetamask(browser: puppet.Browser) {
   verbose('Close popup');
   const popupCloseBtn = await page.waitForSelector('.popover-header__button');
   await popupCloseBtn.click();
-
+/*
   verbose('Navigate to https://app-dev.creaticles.com');
   await page.goto(' https://app-dev.creaticles.com');
 
@@ -61,7 +61,7 @@ export async function setupMetamask(browser: puppet.Browser) {
   const connectBtn = await page.waitForSelector('.Button_isPrimary__a_bSB');
   await connectBtn.click();
 
-
+*/
 }
 
 async function inputSeed(page: puppet.Page, seed: string) {

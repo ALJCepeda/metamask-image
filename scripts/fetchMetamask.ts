@@ -5,6 +5,8 @@ import {existsSync, mkdirSync, createWriteStream} from "fs";
 import {join, parse} from "path";
 import AdmZip = require("adm-zip");
 import {log1, log2} from "../src/utils";
+import {JSAML} from "@vlegm/utils";
+import {DEFAULT_DEST, MANIFEST_PATH} from "../src/config";
 
 const URL = 'https://api.github.com/repos/metamask/metamask-extension/releases';
 
@@ -14,13 +16,14 @@ interface MetamaskRelease {
   tag: string;
 }
 
-export const DEFAULT_DEST = `${homedir()}/.cache/metamask`;
-
 export async function fetchMetamask(userAgent: string = 'Mozilla/5.0', version = 'latest') {
   log1('Fetching metamask');
   const release = await getMetamaskRelease(userAgent, version);
   const zipPath = await downloadMetamask(release);
-  return unzip(zipPath);
+  const folderPath = await unzip(zipPath);
+  await JSAML.save({
+    latest: folderPath
+  }, MANIFEST_PATH);
 }
 
 async function fetch(url: string): Promise<IncomingMessage> {
