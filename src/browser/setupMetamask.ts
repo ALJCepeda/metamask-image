@@ -17,6 +17,8 @@ export async function setupMetamask(browser: puppet.Browser) {
   await chooseMetamaskWallet(page, browser);
   await signMetamaskLogin(page, browser);
   await chooseTestNetwork(page, browser);
+
+  return page
 }
 
 async function chooseTestNetwork(page: puppet.Page, browser:puppet.Browser) {
