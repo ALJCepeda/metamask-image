@@ -6,7 +6,7 @@
   "scripts": {
     "build": "docker build -t metamask .",
     "start": "ts-node scripts/launch-browser.ts",
-    "download-metamask": "ts-node scripts/fetchMetamask.ts",
+    "download-metamask": "ts-node scripts/fetch-metamask.ts",
     "inspect": "docker run -it --rm metamask zsh"
   },
   "dependencies": {
