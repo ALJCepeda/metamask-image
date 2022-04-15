@@ -15,15 +15,18 @@ interface MetamaskRelease {
   tag: string;
 }
 
-export async function fetchMetamask(userAgent: string = 'Mozilla/5.0', version = 'latest') {
+(async () => {
   log1('Fetching metamask');
+  const userAgent = 'Mozilla/5.0';
+  const version = 'latest';
   const release = await getMetamaskRelease(userAgent, version);
   const zipPath = await downloadMetamask(release);
   const folderPath = await unzip(zipPath);
   await JSAML.save({
     latest: folderPath
   }, MANIFEST_PATH);
-}
+  log1('Done!');
+})()
 
 async function fetch(url: string): Promise<IncomingMessage> {
   return new Promise(async (resolve, reject) => {
@@ -39,6 +42,7 @@ async function fetch(url: string): Promise<IncomingMessage> {
     req.on('error', reject);
   })
 }
+
 async function unzip(filePath: string) {
   const parsed = parse(filePath);
   const folderPath = join(parsed.dir, parsed.name);
@@ -57,12 +61,12 @@ async function downloadMetamask(release:MetamaskRelease, dest:string = DEFAULT_D
   return new Promise(async (resolve) => {
     const filePath = join(dest, release.filename);
 
-    if(existsSync(filePath)) {
+    if (existsSync(filePath)) {
       return resolve(filePath);
     }
 
-    if(!existsSync(dest)) {
-      mkdirSync(dest, { recursive: true });
+    if (!existsSync(dest)) {
+      mkdirSync(dest, {recursive: true});
     }
 
     log2('Downloading', release.downloadUrl);
@@ -72,8 +76,6 @@ async function downloadMetamask(release:MetamaskRelease, dest:string = DEFAULT_D
     resp.on('end', () => resolve(filePath));
   });
 }
-
-
 
 async function getMetamaskRelease(userAgent: string, version = 'latest'): Promise<MetamaskRelease> {
   log2('Fetching Releases', userAgent);
@@ -107,5 +109,3 @@ async function getMetamaskRelease(userAgent: string, version = 'latest'): Promis
     });
   });
 }
-
-fetchMetamask().then(() => log1('Done!'));
