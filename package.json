@@ -4,14 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "docker run -it --rm metamask yarn browser",
     "build": "docker build -t metamask .",
-    "browser": "ts-node src/browser/index.ts",
-    "inspect": "docker run -it --rm metamask zsh",
-    "vlm": "vlm shell -c /mnt/host metamask",
-    "download-metamask": "ts-node scripts/fetchMetamask.ts"
+    "start": "ts-node scripts/launch-browser.ts",
+    "download-metamask": "ts-node scripts/fetchMetamask.ts",
+    "inspect": "docker run -it --rm metamask zsh"
   },
   "dependencies": {
+    "@vlegm/cli": "^1.0.19",
     "@vlegm/utils": "^1.0.1",
     "adm-zip": "^0.5.9",
     "chalk": "^4.x",
