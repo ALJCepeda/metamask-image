@@ -29,6 +29,7 @@ export async function launch(headless:boolean = true, xvfb?:XVFBStub) {
 
   const browser = await puppet.launch({
     headless: false,
+    executablePath: '/usr/bin/chromium',
     args
   });
 
