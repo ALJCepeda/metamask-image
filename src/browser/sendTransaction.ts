@@ -1,5 +1,5 @@
 import * as puppet from "puppeteer";
-import {verbose} from "../utils";
+import {log1, verbose} from "../utils";
 
 interface TransactionRequest {
   title?: string;
@@ -7,7 +7,8 @@ interface TransactionRequest {
   amount?: string;
 }
 
-export async function sendTransaction(request: TransactionRequest, page: puppet.Page, browser: puppet.Browser) {
+export async function sendTransaction(page: puppet.Page, browser: puppet.Browser, request: TransactionRequest = {}) {
+  log1('Sending Transaction');
   verbose('Request');
   const requestBtn = await page.waitForSelector('.Button_isPrimary__a_bSB');
   await requestBtn.click();
@@ -25,7 +26,7 @@ export async function sendTransaction(request: TransactionRequest, page: puppet.
   await amountInput.type(request.amount || '0.0001');
 
   await page.waitForTimeout(1000);
-  
+
   verbose('Submit');
   const waitForWindow = new Promise(resolve => browser.on('targetcreated', (target: puppet.Target) => resolve(target.page()))) as Promise<puppet.Page>;
   const submitBtn = await page.waitForSelector('input[type="submit"]');

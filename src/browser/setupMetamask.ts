@@ -1,19 +1,17 @@
 import * as puppet from "puppeteer";
 import {log1, verbose} from "../utils";
 
-const seed = 'blanket echo model okay twin dress produce inhale above fine credit rain';
-const password = 'password1234';
-
-export async function setupMetamask(browser: puppet.Browser) {
+export async function setupMetamask(browser: puppet.Browser, seed:string, password:string) {
   log1('Setting up metamask');
   verbose('Waiting for page');
   const page = await onPage(browser, 'chrome-extension://[a-z]+/home.html');
 
+  return;
   verbose('Closing blank page');
   const pages = await browser.pages();
   await pages[0].close();
 
-  await importWallet(page);
+  await importWallet(page, seed, password);
   await chooseMetamaskWallet(page, browser);
   await signMetamaskLogin(page, browser);
   await chooseTestNetwork(page, browser);
@@ -57,7 +55,7 @@ async function signMetamaskLogin(page:puppet.Page, browser:puppet.Browser) {
   await signBtn2.click();
 }
 
-async function importWallet(page: puppet.Page) {
+async function importWallet(page: puppet.Page, seed: string, password: string) {
   verbose('Continue button')
   const continueBtn = await page.waitForSelector('.welcome-page button');
   await continueBtn.click();
@@ -141,6 +139,7 @@ async function inputSeed(page: puppet.Page, seed: string) {
 async function onPage(browser: puppet.Browser, regex: string): Promise<puppet.Page>{
   return new Promise((resolve) => {
     browser.on('targetcreated', async (target: puppet.Target) => {
+      console.log('target created:', target.url());
       if(target.url().match(regex)) {
         const page = target.page();
         resolve(page);
