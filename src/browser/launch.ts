@@ -8,7 +8,14 @@ import {XVFBStub} from "../types";
 const seed = 'blanket echo model okay twin dress produce inhale above fine credit rain';
 const password = 'password1234';
 
-export async function launch(headless:boolean = true, xvfb?:XVFBStub) {
+interface LaunchOptions {
+  headless: boolean;
+  xvfb?:XVFBStub
+}
+
+export async function launch(options:LaunchOptions) {
+  const { headless, xvfb } = options;
+
   if(headless === true && !xvfb) {
     throw new Error('Need a virtual display to run headless');
   }

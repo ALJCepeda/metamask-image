@@ -38,4 +38,6 @@ export async function sendTransaction(page: puppet.Page, browser: puppet.Browser
   verbose('Confirm');
   const confirmBtn = await submitWindow.waitForSelector('button[data-testid="page-container-footer-next"]');
   await confirmBtn.click();
+
+  log1('Transaction successfully sent!');
 }
