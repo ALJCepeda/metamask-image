@@ -1,6 +1,5 @@
 import {get} from "https";
 import {IncomingMessage} from "http";
-import {homedir} from "os";
 import {existsSync, mkdirSync, createWriteStream} from "fs";
 import {join, parse} from "path";
 import AdmZip = require("adm-zip");

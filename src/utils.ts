@@ -4,7 +4,7 @@ export function log1(a: string) {
   console.log(`${chalk.yellowBright(a)}`);
 }
 
-export function log2(a: string, b: string) {
+export function log2(a: string, b: string | string[]) {
   console.log(`${chalk.greenBright(a)}: ${chalk.whiteBright(b)}`);
 }
 

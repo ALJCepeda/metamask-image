@@ -6,7 +6,6 @@ export async function setupMetamask(browser: puppet.Browser, seed:string, passwo
   verbose('Waiting for page');
   const page = await onPage(browser, 'chrome-extension://[a-z]+/home.html');
 
-  return;
   verbose('Closing blank page');
   const pages = await browser.pages();
   await pages[0].close();
@@ -139,7 +138,6 @@ async function inputSeed(page: puppet.Page, seed: string) {
 async function onPage(browser: puppet.Browser, regex: string): Promise<puppet.Page>{
   return new Promise((resolve) => {
     browser.on('targetcreated', async (target: puppet.Target) => {
-      console.log('target created:', target.url());
       if(target.url().match(regex)) {
         const page = target.page();
         resolve(page);
