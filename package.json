@@ -10,7 +10,7 @@
     "inspect": "docker run -it --rm metamask zsh"
   },
   "dependencies": {
-    "@vlegm/cli": "^1.0.19",
+    "@vlegm/cli": "^1.0.20",
     "@vlegm/utils": "^1.0.1",
     "adm-zip": "^0.5.9",
     "chalk": "^4.x",
