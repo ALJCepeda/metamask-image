@@ -12,7 +12,7 @@
     "example": "WALLET_SEED='blanket echo model okay twin dress produce inhale above fine credit rain' WALLET_PASSWORD='password1234' yarn headless"
   },
   "dependencies": {
-    "@vlegm/cli": "^1.0.20",
+    "@vlegm/cli": "^1.0.21",
     "@vlegm/utils": "^1.0.1",
     "adm-zip": "^0.5.9",
     "chalk": "^4.x",
