@@ -5,9 +5,6 @@ import {setupMetamask} from "./setupMetamask";
 import {log2} from "../utils";
 import {XVFBStub} from "../types";
 
-const seed = 'blanket echo model okay twin dress produce inhale above fine credit rain';
-const password = 'password1234';
-
 interface LaunchOptions {
   headless: boolean;
   hasDockerHost?: boolean;
@@ -43,6 +40,9 @@ export async function launch(options:LaunchOptions) {
     args
   });
 
+  const seed = process.env.WALLET_SEED;
+  const password = process.env.WALLET_PASSWORD;
+  log2(seed, password);
   const page = await setupMetamask(browser, seed, password);
 
   return { browser, page };

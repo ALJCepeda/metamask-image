@@ -8,7 +8,8 @@
     "headless": "ts-node scripts/launch-headless.ts",
     "headed": "ts-node scripts/launch-headed.ts",
     "download-metamask": "ts-node scripts/fetch-metamask.ts",
-    "inspect": "docker run -it --rm metamask zsh"
+    "inspect": "docker run -it --rm metamask zsh",
+    "example": "WALLET_SEED='blanket echo model okay twin dress produce inhale above fine credit rain' WALLET_PASSWORD='password1234' yarn headless"
   },
   "dependencies": {
     "@vlegm/cli": "^1.0.20",
