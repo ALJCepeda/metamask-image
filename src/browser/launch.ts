@@ -10,6 +10,7 @@ const password = 'password1234';
 
 interface LaunchOptions {
   headless: boolean;
+  hasDockerHost?: boolean;
   xvfb?:XVFBStub
 }
 
@@ -30,6 +31,8 @@ export async function launch(options:LaunchOptions) {
 
   if(headless === true) {
     args.push(`--display=${xvfb._display}`);
+  } else if(options.hasDockerHost !== false) {
+    args.push(`--display=host.docker.internal:0.0`)
   }
 
   log2('Launching with:', args);
