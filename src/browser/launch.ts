@@ -42,7 +42,6 @@ export async function launch(options:LaunchOptions) {
 
   const seed = process.env.WALLET_SEED;
   const password = process.env.WALLET_PASSWORD;
-  log2(seed, password);
   const page = await setupMetamask(browser, seed, password);
 
   return { browser, page };
