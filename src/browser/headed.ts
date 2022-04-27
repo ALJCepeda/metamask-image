@@ -6,6 +6,6 @@ import {sendTransaction} from "./sendTransaction";
     headless: false,
   });
 
-  await sendTransaction(page, browser, {});
+  //await sendTransaction(page, browser, {});
   await browser.close();
 })();

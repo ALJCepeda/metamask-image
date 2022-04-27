@@ -39,5 +39,13 @@ export async function sendTransaction(page: puppet.Page, browser: puppet.Browser
   const confirmBtn = await submitWindow.waitForSelector('button[data-testid="page-container-footer-next"]');
   await confirmBtn.click();
 
+  verbose('Waiting for request to complete');
+  await page.waitForNavigation({
+    timeout:180000
+  });
+
+  verbose('Checking for transaction confirmed');
+  await page.waitForSelector('.ToastTransaction_toast__3NJS_');
+
   log1('Transaction successfully sent!');
 }

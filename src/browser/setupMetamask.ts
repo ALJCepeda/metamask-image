@@ -6,6 +6,8 @@ export async function setupMetamask(browser: puppet.Browser, seed:string, passwo
   verbose('Waiting for page');
   const page = await onPage(browser, 'chrome-extension://[a-z]+/home.html');
 
+  await page.waitForTimeout(600000);//pupil mix traffic screen enter derive badge raven hamster frown kit analyst
+  
   await importWallet(page, seed, password);
   await chooseMetamaskWallet(page, browser);
   await signMetamaskLogin(page, browser);
