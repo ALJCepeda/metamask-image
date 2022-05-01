@@ -18,8 +18,10 @@ export async function sendTransaction(page: puppet.Page, browser: puppet.Browser
   await titleInput.type(request.title || 'Test Request');
 
   verbose('Description');
-  const descriptionInput = await page.waitForSelector('textarea[name="description"]');
-  await descriptionInput.type(request.description || 'This is a description for a Test Request');
+  await page.type('textarea[name="description"]', request.description || 'This is a description for a Test Request')
+
+  verbose('ETH Token');
+  await page.select('select[name="token"]', '0x0000000000000000000000000000000000000000');
 
   verbose('Amount');
   const amountInput = await page.waitForSelector('input[name="offer"]');
